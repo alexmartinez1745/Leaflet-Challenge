@@ -23,14 +23,24 @@ var url =
   "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Grab data with d3
-d3.json(url).then(function(data) {
-    console.log(data);
+// d3.json(url).then(function(data) {
+//     console.log(data);
 
-    // Create a new marker cluster group
+//     // Create a new marker cluster group
 //   var markers = L.markerClusterGroup();
 //   data.forEach(eq => {
 //     if (eq.location) {
-//       markers.addLayer(L.marker([eq.geometry.coordinates[1], eq.geometry.coordinates[0]]))
+//       markers.addLayer(L.marker([eq.feautures.geometry.coordinates[1], eq.feautures.geometry.coordinates[0]]))
 //     }
-});
+// });
 // })
+
+d3.json(url).then(function (data) {
+    console.log(data);
+    data.forEach(data => {
+      var lat = data.features.geometry.coordinates[0];
+      var long = data.features.geometry.coordinates[1];
+      L.marker([long, lat]).addTo(myMap);
+    }
+)
+  });
