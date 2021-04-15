@@ -23,7 +23,14 @@ var url =
   "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Grab data with d3
-d3.json(url).then(function(data){
+d3.json(url).then(function(data) {
     console.log(data);
 
-})
+    // Create a new marker cluster group
+//   var markers = L.markerClusterGroup();
+//   data.forEach(eq => {
+//     if (eq.location) {
+//       markers.addLayer(L.marker([eq.geometry.coordinates[1], eq.geometry.coordinates[0]]))
+//     }
+});
+// })
