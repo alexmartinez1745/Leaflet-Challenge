@@ -65,4 +65,13 @@ d3.json(url).then(function(data) {
       + feature.properties.mag + "</h4> <hr> <h4> Time: " + new Date(feature.properties.time) + "</h4>");
     }
   }).addTo(myMap);
+
+  // Add legend to map
+  var legend = L.control({position: "bottomright"});
+  legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    depthLabel = [-10, 10, 30, 50, 70, 90];
+    
+  }
+  legend.addTo(myMap)
 });
