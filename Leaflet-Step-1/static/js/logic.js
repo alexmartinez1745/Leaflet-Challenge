@@ -24,15 +24,9 @@ var url =
 // Grab data with d3
 d3.json(url).then(function (data) {
   console.log(data);
-  function circleMarks(feature) {
-    return {
-      opacity: 1,
-      fillOpacity: 1,
-      fillColor: colorSelect(feature.geometry[2]),
-      color: "black",
-      radius: sizeCheck(feature.properties.mag),
-    };
-  };
+  function markers(mag){
+    return mag * 5
+  }
 
   // Select color depending on depth of the earthquake
   function colorSelect(depth) {
@@ -51,6 +45,25 @@ d3.json(url).then(function (data) {
           return "#BDDE34";
     }
   }
+
+  L.geoJSON(data, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, 
+        // Set the style of the markers based on properties.mag
+        {
+          radius: markers(feature.properties.mag),
+          fillColor: colorSelect(feature.geometry.coordinates[2]),
+          fillOpacity: 0.7,
+          color: "black",
+          weight: 0.6
+        }
+      );
+    },
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup("<h4> Site: " + feature.properties.place + "</h4> <hr> <h4> Magnitude: "
+      + feature.properties.mag + "</h4> <hr> <h4> Time: " + new Date(feature.properties.time) + "</h4>");
+    }
+  }).addTo(myMap);
 });
 
 // function createFeatures(eqData) {
