@@ -24,7 +24,24 @@ var url =
 // Grab data with d3
 d3.json(url).then(function (data) {
   console.log(data);
-  createFeatures(data.features);
+  function circleMarks(feature) {
+    return {
+      opacity: 1,
+      fillOpacity: 1,
+      fillColor: colorSelect(feature.geometry.coordinates[2]),
+      color: "black",
+      radius: sizeCheck(feature.properties.mag),
+      stroke: true,
+      weight: 0.5
+    };
+  };
+
+  function colorSelect(depth) {
+    switch (depth) {
+      case depth > -10 and < 10:
+        return ""
+    }
+  }
 });
 
 // function createFeatures(eqData) {
