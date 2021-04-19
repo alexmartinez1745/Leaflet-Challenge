@@ -34,9 +34,9 @@ d3.json(url).then(function (data) {
   function colorSelect(depth) {
     switch (true) {
       case depth > 90:
-        return "#F6412D";
+        return "#F00505";
       case depth > 70:
-        return "#FF5607";
+        return "#D95F0E";
       case depth > 50:
         return "#FF9800";
       case depth > 30:
