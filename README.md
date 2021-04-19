@@ -10,6 +10,8 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 ### Visualization
 
+[Earthquake Map](Images/Earthquake_Map.png)
+
 1. **Get data set**
 
    The USGS provides earthquake data in a number of different formats, updated every 5 minutes. 
