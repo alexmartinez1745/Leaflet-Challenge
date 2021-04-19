@@ -1,3 +1,31 @@
+
+
+
+
+// Load in GeoJson data
+var url =
+  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+// Grab data with d3
+d3.json(url).then(function(data) {
+    console.log(data);
+    createFeatures(data.features)
+})
+
+function createFeatures(eqData) {
+  function onEachFeat (feature) {
+    layer.bindPopup("<h3>" + feature.properties.place +
+      "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+  }
+  // Create a GeoJSON layer containing the features array on the earthquakeData object
+  // Run the onEachFeature function once for each piece of data in the array
+  var earthquakes = L.geoJSON(eqData, {
+    onEachFeat: onEachFeat
+  });
+
+  // Sending our earthquakes layer to the createMap function
+  createMap(earthquakes);
+}
 // Creating map object
 var myMap = L.map("map", {
   center: [34.0522, -118.2437],
@@ -17,30 +45,3 @@ L.tileLayer(
     accessToken: API_KEY,
   }
 ).addTo(myMap);
-
-// Load in GeoJson data
-var url =
-  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
-
-// Grab data with d3
-// d3.json(url).then(function(data) {
-//     console.log(data);
-
-//     // Create a new marker cluster group
-//   var markers = L.markerClusterGroup();
-//   data.forEach(eq => {
-//     if (eq.location) {
-//       markers.addLayer(L.marker([eq.feautures.geometry.coordinates[1], eq.feautures.geometry.coordinates[0]]))
-//     }
-// });
-// })
-
-d3.json(url).then(function (data) {
-    console.log(data);
-    data.forEach(data => {
-      var lat = data.features.geometry.coordinates[0];
-      var long = data.features.geometry.coordinates[1];
-      L.marker([long, lat]).addTo(myMap);
-    }
-)
-  });
