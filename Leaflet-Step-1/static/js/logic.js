@@ -28,18 +28,27 @@ d3.json(url).then(function (data) {
     return {
       opacity: 1,
       fillOpacity: 1,
-      fillColor: colorSelect(feature.geometry.coordinates[2]),
+      fillColor: colorSelect(feature.geometry[2]),
       color: "black",
       radius: sizeCheck(feature.properties.mag),
-      stroke: true,
-      weight: 0.5
     };
   };
 
+  // Select color depending on depth of the earthquake
   function colorSelect(depth) {
-    switch (depth) {
-      case depth > -10 and < 10:
-        return ""
+    switch (true) {
+      case depth > 90:
+        return "#F6412D";
+        case depth > 70:
+          return "#FF5607";
+        case depth > 50:
+          return "#FF9800";
+        case depth > 30:
+          return "#FFC100";
+        case depth > 10:
+          return "#FFEC19";
+        default:
+          return "#BDDE34";
     }
   }
 });
