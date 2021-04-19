@@ -17,13 +17,16 @@ L.tileLayer(
     accessToken: API_KEY,
   }).addTo(myMap);
 
-// Load in GeoJson data
+// Endpoint of geoJson data (Earthquakes in past 7 days)
 var url =
   "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Grab data with d3
-d3.json(url).then(function (data) {
+d3.json(url).then(function(data) {
+  // Look through data for proper loading in console
   console.log(data);
+
+  // Create markers size by magnitude
   function markers(mag){
     return mag * 5
   }
@@ -46,10 +49,11 @@ d3.json(url).then(function (data) {
     }
   }
 
+  // Load in the geojson
   L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
       return L.circleMarker(latlng, 
-        // Set the style of the markers based on properties.mag
+        // Set the style of the markers using functions above
         {
           radius: markers(feature.properties.mag),
           fillColor: colorSelect(feature.geometry.coordinates[2]),
@@ -59,56 +63,11 @@ d3.json(url).then(function (data) {
         }
       );
     },
+    
+    // Create a popup for each earthquake marker on click
     onEachFeature: function(feature, layer) {
       layer.bindPopup("<h4> Site: " + feature.properties.place + "</h4> <hr> <h4> Magnitude: "
       + feature.properties.mag + "</h4> <hr> <h4> Time: " + new Date(feature.properties.time) + "</h4>");
     }
   }).addTo(myMap);
 });
-
-// function createFeatures(eqData) {
-//   // Function to run on each feature of the data
-//   function onEachFeat(feature) {
-//     // Bind extra data to a popup
-//     layer.bindPopup(
-//       "<h3>" +
-//         feature.properties.place +
-//         "</h3><hr><p>" +
-//         new Date(feature.properties.time) +
-//         "</p>"
-//     );
-//   }
-
-//   // Create a GeoJSON layer with the data found and run the onEachFeat function for each earthquake
-//   var earthquake = L.geoJSON(eqData, {
-//     onEachFeat: onEachFeat,
-//   });
-
-//   // Send earthquake layer to the createMap function
-//   createMap(earthquake);
-// }
-
-// function createMap(earthquake) {
-  
-//   );
-
-//   // Add layer to basemap object
-//   var baseMaps = {
-//     "Street Map": streetMap,
-//   };
-
-//   // Create overlay object to hold our overlay layer
-//   var overlayMaps = {
-//     Earthquakes: earthquake,
-//   };
-
-  
-//   });
-
-//   // Create layer control and add to maps
-//   L.control
-//     .layers(baseMaps, overlayMaps, {
-//       collapsed: false,
-//     })
-//     .addTo(myMap);
-// }
