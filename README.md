@@ -2,9 +2,9 @@
 
 ## Background
 
-Welcome to the United States Geological Survey, or USGS for short! The USGS is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment; and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes. As a new hire, you will be helping them out with an exciting new project!
+Tools used: Mapbox, Leaflet (V1.6), HTML5, CSS
 
-The USGS is interested in building a new set of tools that will allow them visualize their earthquake data. They collect a massive amount of data from all over the world each day, but they lack a meaningful way of displaying it. Their hope is that being able to visualize their data will allow them to better educate the public and other government organizations (and hopefully secure more funding..) on issues facing our planet.
+Help to visualize the United States Geological Survey (USGS) earthquake data.
 
 ## Steps Taken
 
@@ -27,10 +27,3 @@ The USGS is interested in building a new set of tools that will allow them visua
    * Bind popups: when a marker is clicked, additional information is presented.
 
    * Added a legend that provides context for the map data.
-
-
-- - -
-
-### Copyright
-
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
